@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Ispit</title>
+</head>
+<body>
+<div class="container text-center" id="pocetna" style="margin-top: 10px">
+    <input type="button"  id="1" value="1" onclick="dajDugmad1()" class="btn btn-primary">
+    <input type="button"  id="2" value="2" onclick="dajDugmad2()" class="btn btn-primary">
+    <input type="button"  id="3" value="3" onclick="dajDugmad3()" class="btn btn-primary">
+    <input type="button"  id="4" value="4" onclick="dajDugmad4()" class="btn btn-primary">
+    <input type="button"  id="5" value="5" onclick="dajDugmad5()" class="btn btn-primary">
+    <input type="button"  id="6" value="6" onclick="dajDugmad6()" class="btn btn-primary">
+
+
+</div>
+<div class="container text-center" id="lala" style="margin-top:10px;color: green ">
+
+</div>
+<script>
+    var lista = [];
+    var pocetni = "";
+    var noviniz = [];
+    var score = 0;
+    document.body.style.backgroundColor = 'black';
+    function ucitaj(){
+        lista = [];
+        pocetni = "";
+        noviniz = [];
+        while(lista.length <6) {
+            document.getElementById('1').disabled = true;
+            document.getElementById('2').disabled = true;
+            document.getElementById('3').disabled = true;
+            document.getElementById('4').disabled = true;
+            document.getElementById('5').disabled = true;
+            document.getElementById('6').disabled = true;
+            var rand = Math.floor(Math.random() * (7 - 1)) + 1;
+            if(lista.includes(rand) === false) {
+                lista.push(rand);
+                pocetni +=  `<button>`+rand+`</button>`+" ";
+
+            }
+        }
+        document.getElementById('lala').innerHTML = pocetni;
+    }
+    ucitaj();
+    function skloni(){
+        setTimeout(function () {
+            document.getElementById('lala').innerHTML = "";
+            document.getElementById('1').disabled = false;
+            document.getElementById('2').disabled = false;
+            document.getElementById('3').disabled = false;
+            document.getElementById('4').disabled = false;
+            document.getElementById('5').disabled = false;
+            document.getElementById('6').disabled = false;
+
+        },3000);
+    }
+    function dajDugmad1(){
+        var vrijednost = document.getElementById('1').value;
+        document.getElementById('1').disabled = true;
+        noviniz.push(parseInt(vrijednost));
+        provjerikraj();
+    }
+    function dajDugmad2(){
+        var vrijednost = document.getElementById('2').value;
+        document.getElementById('2').disabled = true;
+
+        noviniz.push(parseInt(vrijednost));
+        provjerikraj();
+    }
+    function dajDugmad3(){
+        var vrijednost = document.getElementById('3').value;
+        document.getElementById('3').disabled = true;
+        noviniz.push(parseInt(vrijednost));
+        provjerikraj();
+    }
+    function dajDugmad4(){
+        var vrijednost = document.getElementById('4').value;
+        document.getElementById('4').disabled = true;
+        noviniz.push(parseInt(vrijednost));
+        provjerikraj();
+    }
+    function dajDugmad5(){
+        var vrijednost = document.getElementById('5').value;
+        document.getElementById('5').disabled = true;
+        noviniz.push(parseInt(vrijednost));
+        provjerikraj();
+    }
+    function dajDugmad6(){
+        var vrijednost = document.getElementById('6').value;
+        document.getElementById('6').disabled = true;
+        noviniz.push(parseInt(vrijednost));
+        provjerikraj();
+    }
+    function provjerikraj(){
+        if(noviniz.length === 6){
+            if(lista[0] === noviniz[0] && lista[1] === noviniz[1] && lista[2] === noviniz[2] && lista[3] === noviniz[3] && lista[4] === noviniz[4] && lista[5] === noviniz[5]) {
+                ucitaj();
+                skloni();
+                score += 1;
+
+            }
+            else {
+                document.getElementById('lala').innerHTML = "KRAJ!"+ " Vaš skor je: "+score+`<br>`;
+                var div = document.getElementById('lala');
+                var novii = document.createElement('button');
+                novii.setAttribute('class','btn btn-primary');
+                novii.setAttribute('onclick','ucitaj();skloni()');
+                novii.innerHTML = "Započni novu igru";
+                div.appendChild(novii);
+            }
+        }
+    }
+
+    skloni();
+
+</script>
+</body>
+</html>
